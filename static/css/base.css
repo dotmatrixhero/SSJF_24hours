@@ -440,3 +440,33 @@ div#stepmult input {
 	margin-left:auto;
 	margin-right:auto;
 }
+
+div#notes, div#grader{
+        float:right;
+	border-radius: 10px;
+	position: fixed;
+	right:15px; 
+	border: solid gray 15px;
+        width:350px;
+
+}
+
+div#notes{
+       width: 370px;
+       top: 15px;
+       height: auto;
+
+}
+div#grader{
+	background-color: #8F8F8F;
+	width: 350px;
+	padding: 10px;
+	bottom: 15px;
+	height: auto;
+
+}
+
+span.grader_text{
+        font-size: 14pt;
+	font-family:"Arial", sans-serif;
+}

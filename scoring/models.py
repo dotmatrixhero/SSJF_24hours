@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
-from grants import GrantApplication
-from fund import Membership
+from grant.models import GrantApplication
+from fund.models import Membership
 
 """Early sketch of a model & modelform for an individual rating.  Feel free to modify or start from scratch 
     

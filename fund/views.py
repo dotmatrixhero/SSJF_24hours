@@ -64,7 +64,7 @@ def Register(request):
           membership.save()
           member.current = membership.pk
           member.save()      
-          logging.info('Registration - membership in ' + giv + ' created')
+          logging.info('Registration - membership in ' + str(giv) + ' created')
         user = authenticate(username=username, password=password)
         if user:
           if user.is_active:

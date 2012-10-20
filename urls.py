@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     (r'^org/register/$', 'grants.views.OrgRegister'),
     (r'^org/nr', direct_to_template, {'template': 'grants/not_grantee.html'}),
     (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/org'}),
-    
+
     #reset password
     (r'^org/reset$', 'django.contrib.auth.views.password_reset', {'template_name':'grants/reset.html', 'from_email':'webmaster@socialjusticefund.org', 'email_template_name':'grants/password_reset_email.html'}),
     (r'^org/reset-sent', 'django.contrib.auth.views.password_reset_done', {'template_name':'grants/password_reset_done.html'}),
@@ -52,7 +52,7 @@ urlpatterns = patterns('',
     #Reporting URLs should start with /grants
 
 ## SCORING ##
-    
+    (r'^scoring/reading/(?P<app_id>\d+)/$', 'scoring.views.read_grant'),
     #Scoring URLs should start with /scoring
     
 ## FUNDRAISING ##

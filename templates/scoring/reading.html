@@ -4,7 +4,10 @@ The given code expects 2 variabled from the view:
 1. The GrantApplication object as 'app'
 2. A GrantApplicationForm object as 'form' - used to display the labels.  -->
 
+{% extends 'base.html' %}
+{% block content %}
 
+<head>
 <div align="center">
 <h2>{{app.organization}}</h2>
 Submitted {{app.submission_time}}</div>
@@ -52,3 +55,53 @@ Submitted {{app.submission_time}}</div>
 {{app.narrative4}}<br><br>
 <div class="label">{{form.narrative5.label|safe}}</div><br>
 {{app.narrative5}}<br><br>
+
+<div id="notes">
+    <form>
+        <textarea rows="20" col="15">
+Please enter your notes here.
+	</textarea>
+    </form>
+</div>
+
+<div id="grader">
+    <form>
+      <div id="program"><span class="grader_text">Program</span> <br />
+        <label><input type="radio" name="program" value="1"/>1</label>
+        <label><input type="radio" name="program" value="2"/>2</label>
+        <label><input type="radio" name="program" value="3"/>3</label>
+        <label><input type="radio" name="program" value="4"/>4</label>
+        <label><input type="radio" name="program" value="5"/>5</label>
+      </div>
+      <div id="diversity"><span class="grader_text">Diversity</span> <br />
+        <label><input type="radio" name="diversity" value="1"/>1</label>
+        <label><input type="radio" name="diversity" value="2"/>2</label>
+        <label><input type="radio" name="diversity" value="3"/>3</label>
+        <label><input type="radio" name="diversity" value="4"/>4</label>
+        <label><input type="radio" name="diversity" value="5"/>5</label>
+      </div>
+      <div id="soundness"><span class="grader_text">Soundness</span> <br />
+	<label><input type="radio" name="soundness" value="1"/>1</label>
+        <label><input type="radio" name="soundness" value="2"/>2</label>
+        <label><input type="radio" name="soundness" value="3"/>3</label>
+        <label><input type="radio" name="soundness" value="4"/>4</label>
+        <label><input type="radio" name="soundness" value="5"/>5</label>
+      </div>
+      <div id="lack_access"><span class="grader_text">Lack of Access</span> <br />
+        <label><input type="radio" name="lack_access" value="1"/>1</label>
+        <label><input type="radio" name="lack_access" value="2"/>2</label>
+        <label><input type="radio" name="lack_access" value="3"/>3</label>
+        <label><input type="radio" name="lack_access" value="4"/>4</label>
+        <label><input type="radio" name="lack_access" value="5"/>5</label>
+      </div>
+      <div id="collaboration"><span class="grader_text">Collaboration</span> <br / >
+        <label><input type="radio" name="collaboration" value="1"/>1</label>
+        <label><input type="radio" name="collaboration" value="2"/>2</label>
+        <label><input type="radio" name="collaboration" value="3"/>3</label>
+        <label><input type="radio" name="collaboration" value="4"/>4</label>
+        <label><input type="radio" name="collaboration" value="5"/>5</label>
+      </div>
+    </form>
+</div>
+
+{% endblock %}
