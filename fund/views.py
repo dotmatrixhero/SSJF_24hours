@@ -244,6 +244,8 @@ def ScoringList(request):
   #base
   header = project.title
   
+
+  #additional code here!
   #this is where you want a try catch to see if any grant applications within grant-list (bring in)
   #have a grant application rating 
   grant_list = grants.models.GrantApplication.objects.filter(grant_cycle = membership.giving_project.grant_cycle)
@@ -260,7 +262,7 @@ def ScoringList(request):
 	except models.ApplicationRating.DoesNotExists:
 	  unreviewed_grants.append(grant)
 
- 
+
 
   return render_to_response('fund/scoring_list.html', {'3active':'true', 'header':header,
                                                 'news':news, 'events':events,

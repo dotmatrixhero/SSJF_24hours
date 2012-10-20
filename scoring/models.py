@@ -13,6 +13,8 @@ class ApplicationRating(models.Model):
   submitted = models.BooleanField(default=False)
 
   
+  
+  
   RATING_CHOICES = (
     (1, 1),
     (2, 2),
@@ -25,6 +27,8 @@ class ApplicationRating(models.Model):
   soundness = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
   lack_of_access = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
   collaboration = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
+  
+  comments = models.TextField()
   
   submission_time = models.DateTimeField(auto_now_add=True)
   def __unicode__(self):
@@ -39,7 +43,7 @@ class RatingForm(ModelForm):
   class Meta:
     model = ApplicationRating
     exclude = ('submission_time')
-    fields = ('program', 'diversity', 'soundness', 'lack_of_access', 'collaboration')
+    fields = ('comments', 'program', 'diversity', 'soundness', 'lack_of_access', 'collaboration')
     widgets = {
       'program': RadioSelect(attrs={'class': 'grader_radio_button'}),
       'diversity': RadioSelect(attrs={'class': 'grader_radio_button'}),
