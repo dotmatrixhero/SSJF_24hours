@@ -13,6 +13,8 @@ class ApplicationRating(models.Model):
   submitted = models.BooleanField(default=False)
 
   
+  
+  
   RATING_CHOICES = (
     (1, 1),
     (2, 2),
