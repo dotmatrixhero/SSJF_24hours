@@ -53,7 +53,7 @@ urlpatterns = patterns('',
 
 ## SCORING ##
     
-   (r'scoring/save$', 'scoring.views.Save'),
+    (r'scoring/save$', 'scoring.views.Save'),
     
 ## FUNDRAISING ##
     
