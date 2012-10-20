@@ -16,6 +16,7 @@ import json as simplejson
 import grants.models
 from fund.decorators import approved_membership
 from fund.forms import *
+from scoring.models import ApplicationRating
 
 #LOGIN & REGISTRATION
 def FundLogin(request):
@@ -243,11 +244,16 @@ def ScoringList(request):
   header = project.title
   
   #additional code here!
-  
-  return render_to_response('fund/info.html', {'3active':'true', 'header':header,
+  grant_list = models.GrantApplication.objects.filter(GrantApplication.grant_cycle = membership.giving_project.grant_cycle)
+ 
+
+
+
+  return render_to_response('fund/scoring_list.html', {'3active':'true', 'header':header,
                                                 'news':news, 'events':events,
                                                 'member':member, 'steps':steps,
-                                                'membership':membership})
+                                                'membership':membership, 'grant_list':grant_list, 
+												'submitted':submitted, 'in_progress':in_progress})
 
 #ERROR & HELP PAGES
 @login_required(login_url='/fund/login/')

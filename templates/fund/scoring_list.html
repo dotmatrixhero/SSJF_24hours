@@ -1,4 +1,7 @@
 {% extends 'fund/blocks.html' %}
+<head>
+	<link href="index.css" type="text/css" rel="stylesheet" />
+</head>
 
 {% block progress %}
 <div id="progress_container">
@@ -7,8 +10,36 @@
 <div id="progress_desc">The giving project has raised ${{membership.giving_project.pledged}} so far</div>
 {% endblock %}
 
+<div>
+	Pending
+	<ul>
+	{%  grant_list(%}
+	 </ul>
+</div>
+
+<div>
+	In Process
+	<ul>
+	<!--<li><a href="">{{grant.organization}}</a></li>-->
+	 </ul>
+</div>
+
+<div>
+	Submitted
+	<ul>
+	 </ul>
+</div>
+
+
 {% block content %}
 
 <!-- content goes here -->
-
+def grant_list(submitted, in_progress): 
+{% submitted_list = [] %}
+{% pending_list = [] %}
+{% in_process_list = [] %}
+{% for grant in grant_list %}
+	{% grant.organization %}
+		
+{% endfor %}
 {% endblock %}

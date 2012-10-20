@@ -9,6 +9,8 @@ class ApplicationRating(models.Model):
 
   application = models.ForeignKey(GrantApplication)
   membership = models.ForeignKey(Membership)
+  submitted = models.BooleanField(default=False)
+  in_progress = models.BooleanField(default=True)
   
   RATING_CHOICES = (
     (0, 0),
@@ -27,7 +29,10 @@ class ApplicationRating(models.Model):
   submission_time = models.DateTimeField(auto_now_add=True)
   
   def total(self):
-    return (self.program*7+self.diversity*5+self.soundness*4+self.lack_of_access*2+self.collaboration*2)
+	if scoring_bonus_poc or scoring_bonus_geo:
+		return (1.1*self.program*7+self.diversity*5+self.soundness*4+self.lack_of_access*2+self.collaboration*2)
+	
+	return (self.program*7+self.diversity*5+self.soundness*4+self.lack_of_access*2+self.collaboration*2)
 
 class RatingForm(ModelForm):
   class Meta:
