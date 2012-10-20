@@ -13,6 +13,7 @@
 <div>
 	Pending
 	<ul>
+	{%  grant_list(%}
 	 </ul>
 </div>
 
@@ -30,7 +31,7 @@
 </div>
 
 
-<!--{% block content %}-->
+{% block content %}
 
 <!-- content goes here -->
 def grant_list(submitted, in_progress): 
@@ -38,7 +39,7 @@ def grant_list(submitted, in_progress):
 {% pending_list = [] %}
 {% in_process_list = [] %}
 {% for grant in grant_list %}
-	{% if submitted %}
+	{% grant.organization %}
 		
 {% endfor %}
-<!--{% endblock %}-->
+{% endblock %}

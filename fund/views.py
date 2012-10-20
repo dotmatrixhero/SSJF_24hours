@@ -244,15 +244,16 @@ def ScoringList(request):
   header = project.title
   
   #additional code here!
-  grant_list = models.GrantApplication.objects.filter(grant_cycle = membership.giving_project.grant_cycle)
+  grant_list = models.GrantApplication.objects.filter(GrantApplication.grant_cycle = membership.giving_project.grant_cycle)
  
 
-  
+
+
   return render_to_response('fund/scoring_list.html', {'3active':'true', 'header':header,
                                                 'news':news, 'events':events,
                                                 'member':member, 'steps':steps,
                                                 'membership':membership, 'grant_list':grant_list, 
-												submitted='submitted', in_progress="in_progress"})
+												'submitted':submitted, 'in_progress':in_progress})
 
 #ERROR & HELP PAGES
 @login_required(login_url='/fund/login/')
