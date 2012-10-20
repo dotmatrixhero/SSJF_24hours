@@ -16,15 +16,16 @@ import fund.models
 def read_grant(request, app_id):
   membership = request.membership
   application = get_object_or_404(grants.models.GrantApplication, pk = app_id)
+  form = grants.models.GrantApplicationForm()
   
   try:
     review = scoring.models.ApplicationRating.objects.get(application = application, membership = membership)
-    form = models.RatingForm(instance=review)
+    scoring_form = models.RatingForm(instance=review)
   except:
-    form = models.RatingForm(initial={'application': application, 'membership': membership})
-    #form = models.RatingForm(initial={'membership': membership})
-  return render_to_response("scoring/reading.html", {'form': form})
-#  "grant": models.GrantApplication.objects.get(pk=app_id)})
+    scoring_form = models.RatingForm(initial={'application': application, 'membership': membership})
+    
+  return render_to_response("scoring/reading.html", {'scoring_form': scoring_form, 'app':application, 'form':form})
+
     
 
 @login_required(login_url='/fund/login/')

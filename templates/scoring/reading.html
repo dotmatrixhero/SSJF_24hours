@@ -49,6 +49,7 @@ function main() {
 </script>
 
 <head>
+</head>
 <div align="center">
 <h2>{{app.organization}}</h2>
 Submitted {{app.submission_time}}</div>
@@ -103,7 +104,7 @@ Submitted {{app.submission_time}}</div>
 
   <div id="grader">
     <form action="/scoring/save" method="post">
-      {{form}}
+      {{scoring_form}}
       <input type="submit" value="Submit Review">
     </form>
     

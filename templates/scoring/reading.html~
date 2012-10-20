@@ -17,19 +17,12 @@ function save() {
 		type:"POST",
 		data:$('form').serialize(),
 		success:function(){
-      alert('success!');
 		},
 		error:function(jqXHR, textStatus, errorThrown){
 			//document.getElementById('autosaved').innerHTML=textStatus+' '+errorThrown;
-      alert(textStatus + ' ' + errorThrown);
 		},
 	});
 	//window.setTimeout("save()", 30000);
-}
-
-function submitReview() {
-  save();
-  alert('rediret to new page (not really)');
 }
 
 function main() {
@@ -106,63 +99,18 @@ Submitted {{app.submission_time}}</div>
 
 <div id="read_sidebar">
   
-  <div id="notes">
-    <form>
-      <textarea rows="20" col="15">
-	Please enter your notes here.
-      </textarea>
-    </form>
-  </div>
-
+  
 
   <div id="grader">
     <form action="/scoring/save" method="post">
       {{form}}
       <input type="submit" value="Submit Review">
     </form>
-    <!--
-    <form>
-      <div id="program" class="grader"><span class="grader_text">Program</span> <br />
-        <label><input type="radio" name="program" value="1"/>1</label>
-        <label><input type="radio" name="program" value="2"/>2</label>
-        <label><input type="radio" name="program" value="3"/>3</label>
-        <label><input type="radio" name="program" value="4"/>4</label>
-        <label><input type="radio" name="program" value="5"/>5</label>
-      </div>
-      <div id="diversity" class="grader"><span class="grader_text">Diversity</span> <br />
-        <label><input type="radio" name="diversity" value="1"/>1</label>
-        <label><input type="radio" name="diversity" value="2"/>2</label>
-        <label><input type="radio" name="diversity" value="3"/>3</label>
-        <label><input type="radio" name="diversity" value="4"/>4</label>
-        <label><input type="radio" name="diversity" value="5"/>5</label>
-      </div>
-      <div id="soundness" class="grader"><span class="grader_text">Soundness</span> <br />
-        <label><input type="radio" name="soundness" value="1"/>1</label>
-        <label><input type="radio" name="soundness" value="2"/>2</label>
-        <label><input type="radio" name="soundness" value="3"/>3</label>
-        <label><input type="radio" name="soundness" value="4"/>4</label>
-        <label><input type="radio" name="soundness" value="5"/>5</label>
-      </div>
-      <div id="lack_access" class="grader"><span class="grader_text">Lack of Access</span> <br />
-        <label><input type="radio" name="lack_access" value="1"/>1</label>
-        <label><input type="radio" name="lack_access" value="2"/>2</label>
-        <label><input type="radio" name="lack_access" value="3"/>3</label>
-        <label><input type="radio" name="lack_access" value="4"/>4</label>
-        <label><input type="radio" name="lack_access" value="5"/>5</label>
-      </div>
-      <div id="collaboration" class="grader"><span class="grader_text">Collaboration</span> <br / >
-        <label><input type="radio" name="collaboration" value="1"/>1</label>
-        <label><input type="radio" name="collaboration" value="2"/>2</label>
-        <label><input type="radio" name="collaboration" value="3"/>3</label>
-        <label><input type="radio" name="collaboration" value="4"/>4</label>
-        <label><input type="radio" name="collaboration" value="5"/>5</label>
-      </div>
-    </form>
-    -->
+    
   </div>
 </div>
-<button id="collapse_sidebar">Collapse Sidebar </button>
-<button id="expand_sidebar" class="hid">Expand Sidebar </button>
+<button id="collapse_sidebar"><img src="../../../static/images/collapse.png" alt="Collapse Sidebar" /> </button>
+<button id="expand_sidebar" class="hid"><img src="../../../static/images/expand.png" alt="Expand Sidebar" /> </button>
 
 {% endblock %}
   
