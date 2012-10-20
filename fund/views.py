@@ -17,7 +17,7 @@ import grants.models
 from fund.decorators import approved_membership
 from fund.forms import *
 #from scoring.models import ApplicationRating
-import scoring.models as scoring
+import scoring.models
 
 #LOGIN & REGISTRATION
 def FundLogin(request):
@@ -249,17 +249,19 @@ def ScoringList(request):
   #this is where you want a try catch to see if any grant applications within grant-list (bring in)
   #have a grant application rating 
   grant_list = grants.models.GrantApplication.objects.filter(grant_cycle = membership.giving_project.grant_cycle)
+  logging.info("grant list:" + str(grant_list))
+  
   unreviewed_grants = []
   reviewed_grants = []
   review_in_progress_grants = []
   for grant in grant_list:
 	try: 
-	  review = scoring.models.ApplicationRating.objects.filter(application = grant, membership = membership)
+	  review = scoring.models.ApplicationRating.objects.get(application = grant, membership = membership)
 	  if review.submitted:
 		reviewed_grants.append(grant)
 	  else: 
 		review_in_progress_grant.append(grant)
-	except models.ApplicationRating.DoesNotExists:
+	except scoring.models.ApplicationRating.DoesNotExist:
 	  unreviewed_grants.append(grant)
 
 

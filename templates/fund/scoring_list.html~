@@ -10,7 +10,6 @@
 <div id="progress_desc">The giving project has raised ${{membership.giving_project.pledged}} so far</div>
 {% endblock %}
 
-{% block content %}
 
 <div>
 	Pending
@@ -39,4 +38,3 @@
 	 </ul>
 </div>
 
-{% endblock %}
