@@ -19,8 +19,10 @@ def read_grant(request, app_id):
   
   try:
     review = scoring.models.ApplicationRating.objects.get(application = application, membership = membership)
+    logging.info('successfully retrieved form')
     form = models.RatingForm(instance=review)
   except:
+    logging.info('creating a new form')
     form = models.RatingForm(initial={'application': application, 'membership': membership})
     #form = models.RatingForm(initial={'membership': membership})
   return render_to_response("scoring/reading.html", {'form': form})
@@ -66,14 +68,17 @@ def Save(request):
   if request.method=='POST':
     form = models.RatingForm(request.POST)
     if form.is_valid():
-      logging.info(form.errors == False)
+      logging.info('form is valid')
       if not request.is_ajax():
         form.submitted = True
-        return redirect('/org/nr')
+        redirect('/fund/apps')
       try:
         form.save()
+        logging.info('INFO SAVED!')
       except Exception, e:
         logging.info(e)
+    else:
+      logging.info('form is not valid')
 
 
 
