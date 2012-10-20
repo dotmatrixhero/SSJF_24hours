@@ -56,15 +56,17 @@ Submitted {{app.submission_time}}</div>
 <div class="label">{{form.narrative5.label|safe}}</div><br>
 {{app.narrative5}}<br><br>
 
-<div id="notes">
+<div id="read_sidebar">
+  
+  <div id="notes">
     <form>
-        <textarea rows="20" col="15">
-Please enter your notes here.
-	</textarea>
+      <textarea rows="20" col="15">
+	Please enter your notes here.
+      </textarea>
     </form>
-</div>
-
-<div id="grader">
+  </div>
+  <button>Collapse Sidebar </button>
+  <div id="grader">
     <form>
       <div id="program"><span class="grader_text">Program</span> <br />
         <label><input type="radio" name="program" value="1"/>1</label>
@@ -102,6 +104,8 @@ Please enter your notes here.
         <label><input type="radio" name="collaboration" value="5"/>5</label>
       </div>
     </form>
+  </div>
 </div>
 
 {% endblock %}
+  
