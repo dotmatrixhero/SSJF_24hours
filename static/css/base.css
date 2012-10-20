@@ -461,9 +461,10 @@ div#notes{
 div#grader{
 	background-color: #8F8F8F;
 	width: 350px;
+	top:0;
 	padding: 10px;
 	bottom: 0px;
-	height: 345px;
+	height: 100%;
 	min-height: 10px;
 
 }

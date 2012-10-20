@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 	<head>
-	
+		<link href="base.css" type="text/css" rel="stylesheet" />
+		
+		<script>
+		windows.onload = main;
+		
+		function main() {
+			var appHeaders = $('.app_header');
+			for (var i = 0; i < appHeaders) {
+				appHeaders.onclick = function() {
+					var app_details = this.hasnext();
+					if (app_details.hasClass('hid')) {
+						app_details.removeClass('hid');
+					} else {
+						app_details.addClass('hid');
+					}
+				}
+			}
+		}
+		</script>
 	</head>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
 	
 	<body>
 		<ul>
-		{% for app, ratings in dict.items %}
-			<li>{{app}}</li>
-			<ul>
-			{% for score in ratings %)
-				<li>{{score.membership.member}}: {{score}} </li>
+		{% for app, average_score in average_points.items %}
+			<li class="app_header">{{app}}: {{average_score}}</li>
+			<ul class="hid">
+			{% for review in dict[app] %)
+				<li>{{review.membership.member}}: {{review.total()}} </li>
 			(% endfor %)
 			</ul>
 		{% endfor %}

@@ -29,16 +29,28 @@ def specific_project_admin(request, project_id):
 	project_app_list = grants.models.GrantApplication.objects.filter(grant_cycle = project.grant_cycle)
 	total_ratings = models.ApplicationRating.objects.filter(membership__giving_project = project, submitted=True)
 	dict = {}
+	average_points = {}
+	member_count = models.Membership.objects.filter(giving_project = project).count()
+	
 	for rating in total_ratings:
 		if dict[rating.application]:
 			dict[rating.application].append(rating)
 		else:
 			dict[rating.application]=[]
 			dict[rating.application].append(rating)
-	return render_to_response("scoring/project_summary.html", {"app_list":project_app_list, "dict":dict })
+    
+	for application, reviews in dict:
+		grand_total_points = 0
+		for review in reivews:
+			grand_total_points += review.total()
+		average_points[application] = grand_total_points * 1.0 / len(application)
+		average_points = sorted(average_points, key=lambda application: average_points[application], reverse=True)
+	return render_to_response("scoring/project_summary.html", {"app_list":project_app_list, "dict":dict, "average_points":average_points })
+	
+
 	
 @login_required(login_url='/fund/login/')
-def all_giving_projects(request):
+def all_giving_projects(request):	
 	all_giving_projects = fund.models.GivingProject.objects.all()
 	return render_to_response("scoring/single_giving_project.html", {"projects":all_giving_projects})
 	
