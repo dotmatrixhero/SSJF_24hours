@@ -470,3 +470,8 @@ span.grader_text{
         font-size: 14pt;
 	font-family:"Arial", sans-serif;
 }
+
+/*All elements with hid are hidden.*/
+.hid {
+  display: none;
+}

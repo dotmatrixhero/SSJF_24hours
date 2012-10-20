@@ -16,7 +16,8 @@ import json as simplejson
 import grants.models
 from fund.decorators import approved_membership
 from fund.forms import *
-from scoring.models import ApplicationRating
+#from scoring.models import ApplicationRating
+import scoring.models as scoring
 
 #LOGIN & REGISTRATION
 def FundLogin(request):
@@ -243,17 +244,37 @@ def ScoringList(request):
   #base
   header = project.title
   
+
   #additional code here!
+  #this is where you want a try catch to see if any grant applications within grant-list (bring in)
+  #have a grant application rating 
   grant_list = grants.models.GrantApplication.objects.filter(grant_cycle = membership.giving_project.grant_cycle)
+  unreviewed_grants = []
+  reviewed_grants = []
+  review_in_progress_grants = []
+  for grant in grant_list:
+	try: 
+	  review = scoring.models.ApplicationRating.objects.filter(application = grant, membership = membership)
+	  if review.submitted:
+		reviewed_grants.append(grant)
+	  else: 
+		review_in_progress_grant.append(grant)
+	except models.ApplicationRating.DoesNotExists:
+	  unreviewed_grants.append(grant)
+  app_rating = scoring.ApplicationRating.objects.get(application = grant_list)
+
+  submitted = app_rating.submitted
+
  
-
-
 
   return render_to_response('fund/scoring_list.html', {'3active':'true', 'header':header,
                                                 'news':news, 'events':events,
                                                 'member':member, 'steps':steps,
                                                 'membership':membership, 'grant_list':grant_list, 
-												'submitted':submitted, 'in_progress':in_progress})
+												'submitted':submitted, 
+												'unreviewed_grants':unreviewed_list, 
+												'reviewed_list':reviewed_list, 
+												'review_in_progress':review_in_progress})
 
 #ERROR & HELP PAGES
 @login_required(login_url='/fund/login/')
