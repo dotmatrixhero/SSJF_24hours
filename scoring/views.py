@@ -16,21 +16,17 @@ import fund.models
 def read_grant(request, app_id):
   membership = request.membership
   application = get_object_or_404(grants.models.GrantApplication, pk = app_id)
-
-  form = grants.models.GrantApplicationForm()
   
   try:
     review = scoring.models.ApplicationRating.objects.get(application = application, membership = membership)
     logging.info('successfully retrieved form')
-
-    scoring_form = models.RatingForm(instance=review)
+    form = models.RatingForm(instance=review)
   except:
     logging.info('creating a new form')
-    scoring_form = models.RatingForm(initial={'application': application, 'membership': membership})
-    
-  return render_to_response("scoring/reading.html", {'scoring_form': scoring_form, 'app':application, 'form':form})
-
-
+    form = models.RatingForm(initial={'application': application, 'membership': membership})
+    #form = models.RatingForm(initial={'membership': membership})
+  return render_to_response("scoring/reading.html", {'form': form})
+#  "grant": models.GrantApplication.objects.get(pk=app_id)})
     
 
 @login_required(login_url='/fund/login/')
@@ -75,12 +71,10 @@ def Save(request):
       logging.info('form is valid')
       if not request.is_ajax():
         form.submitted = True
-        redirect('/fund/apps')
-      try:
         form.save()
-        logging.info('INFO SAVED!')
-      except Exception, e:
-        logging.info(e)
+        return redirect('/fund/apps')
+      form.save()
+      logging.info('INFO SAVED!')
     else:
       logging.info('form is not valid')
 
