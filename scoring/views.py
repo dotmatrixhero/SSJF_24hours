@@ -14,10 +14,15 @@ import fund.models
 @login_required(login_url='/fund/login/')
 @approved_membership()
 def read_grant(request, app_id):
-  #application = get_object_or_404(grants.models.GrantApplication, pk = app_id)
-  #form = models.RatingForm(initial={'application': application})
   membership = request.membership
-  form = models.RatingForm(initial={'membership': membership})
+  #application = get_object_or_404(grants.models.GrantApplication, pk = app_id)
+  
+  try:
+	  review = scoring.models.ApplicationRating.objects.get(application = application, membership = membership)
+    form = models.RatingForm(instance=review)
+  except:
+    #form = models.RatingForm(initial={'application': application})
+    form = models.RatingForm(initial={'membership': membership})
   return render_to_response("scoring/reading.html", {'form': form})
 #  "grant": models.GrantApplication.objects.get(pk=app_id)})
     
