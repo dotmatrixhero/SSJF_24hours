@@ -10,16 +10,36 @@
 <div id="progress_desc">The giving project has raised ${{membership.giving_project.pledged}} so far</div>
 {% endblock %}
 
+
+{% for grant in grant_list %}
+	{% if submitted %}
+		grant
+{% endfor %}
+	
+	{% if in_process_list[]  %}
+		= grant
+{% endfor %}
+
+	{% e %}
+		pending_list[] = grant
+{% endfor %}
+
+
 <div>
 	Pending
 	<ul>
-	{%  grant_list(%}
+	{% for grant in unreviewed_grants %}
+		<li>{{grant.organization}}</li>
+	{% endfor %}
 	 </ul>
 </div>
 
 <div>
 	In Process
 	<ul>
+	{% for grant in review_in_progress_grants %}
+		<li>{{grant.organization}}</li>
+	{% endfor %}
 	<!--<li><a href="">{{grant.organization}}</a></li>-->
 	 </ul>
 </div>
@@ -27,6 +47,9 @@
 <div>
 	Submitted
 	<ul>
+	{% for grant in reviewed_grants %}
+		<li>{{grant.organization}}</li>
+	{% endfor %}
 	 </ul>
 </div>
 
@@ -34,12 +57,11 @@
 {% block content %}
 
 <!-- content goes here -->
-def grant_list(submitted, in_progress): 
-{% submitted_list = [] %}
-{% pending_list = [] %}
-{% in_process_list = [] %}
-{% for grant in grant_list %}
-	{% grant.organization %}
-		
-{% endfor %}
+def grant_list(grant_status): 
+
 {% endblock %}
+
+def grant_type_list(list):
+
+	{{grant.organization}}
+{% endfor %}
