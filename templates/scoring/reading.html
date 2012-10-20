@@ -7,6 +7,35 @@ The given code expects 2 variabled from the view:
 {% extends 'base.html' %}
 {% block content %}
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>
+window.onload = main;
+
+function save() {
+	$.ajax({
+		url:"/scoring/save",
+		type:"POST",
+		data:$('form').serialize(),
+		success:function(){
+      alert('success!');
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			//document.getElementById('autosaved').innerHTML=textStatus+' '+errorThrown;
+      alert(textStatus + ' ' + errorThrown);
+		},
+	});
+	window.setTimeout("autoSave()", 30000);
+}
+
+function main() {
+  var ratingsElements = $('.grader');
+  for (var i = 0; i < ratingsElements.length; i++) {
+    var grader = ratingsElements[i];
+    grader.onclick = save;
+  }
+}
+</script>
+
 <head>
 <div align="center">
 <h2>{{app.organization}}</h2>
@@ -68,35 +97,35 @@ Submitted {{app.submission_time}}</div>
   <button>Collapse Sidebar </button>
   <div id="grader">
     <form>
-      <div id="program"><span class="grader_text">Program</span> <br />
+      <div id="program" class="grader"><span class="grader_text">Program</span> <br />
         <label><input type="radio" name="program" value="1"/>1</label>
         <label><input type="radio" name="program" value="2"/>2</label>
         <label><input type="radio" name="program" value="3"/>3</label>
         <label><input type="radio" name="program" value="4"/>4</label>
         <label><input type="radio" name="program" value="5"/>5</label>
       </div>
-      <div id="diversity"><span class="grader_text">Diversity</span> <br />
+      <div id="diversity" class="grader"><span class="grader_text">Diversity</span> <br />
         <label><input type="radio" name="diversity" value="1"/>1</label>
         <label><input type="radio" name="diversity" value="2"/>2</label>
         <label><input type="radio" name="diversity" value="3"/>3</label>
         <label><input type="radio" name="diversity" value="4"/>4</label>
         <label><input type="radio" name="diversity" value="5"/>5</label>
       </div>
-      <div id="soundness"><span class="grader_text">Soundness</span> <br />
-	<label><input type="radio" name="soundness" value="1"/>1</label>
+      <div id="soundness" class="grader"><span class="grader_text">Soundness</span> <br />
+        <label><input type="radio" name="soundness" value="1"/>1</label>
         <label><input type="radio" name="soundness" value="2"/>2</label>
         <label><input type="radio" name="soundness" value="3"/>3</label>
         <label><input type="radio" name="soundness" value="4"/>4</label>
         <label><input type="radio" name="soundness" value="5"/>5</label>
       </div>
-      <div id="lack_access"><span class="grader_text">Lack of Access</span> <br />
+      <div id="lack_access" class="grader"><span class="grader_text">Lack of Access</span> <br />
         <label><input type="radio" name="lack_access" value="1"/>1</label>
         <label><input type="radio" name="lack_access" value="2"/>2</label>
         <label><input type="radio" name="lack_access" value="3"/>3</label>
         <label><input type="radio" name="lack_access" value="4"/>4</label>
         <label><input type="radio" name="lack_access" value="5"/>5</label>
       </div>
-      <div id="collaboration"><span class="grader_text">Collaboration</span> <br / >
+      <div id="collaboration" class="grader"><span class="grader_text">Collaboration</span> <br / >
         <label><input type="radio" name="collaboration" value="1"/>1</label>
         <label><input type="radio" name="collaboration" value="2"/>2</label>
         <label><input type="radio" name="collaboration" value="3"/>3</label>
