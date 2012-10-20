@@ -3,15 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from fund.decorators import approved_membership
-<<<<<<< HEAD
 from django.shortcuts import get_object_or_404, redirect
 import grants.models
 import models
-=======
-import grants.models
 import fund.models 
-from django.shortcuts import get_object_or_404
->>>>>>> b0eb629c4343099c7e4beaa097de99a78982b60a
 
 # Create your views here.
 
