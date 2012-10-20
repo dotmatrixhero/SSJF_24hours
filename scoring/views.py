@@ -5,6 +5,15 @@ from fund.decorators import approved_membership
 
 # Create your views here.
 
+@approved_membership() 
+def Save(request):
+  if request.method=='POST':
+    form = models.RatingForm(request.POST)
+    if form.is_valid():
+      form.save()
+		 
+   #render_to_response('debug.html', {'form': form})
+
 
 """ There are two blank templates created:
 scoring/reading.html

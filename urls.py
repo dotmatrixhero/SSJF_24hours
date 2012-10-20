@@ -53,7 +53,7 @@ urlpatterns = patterns('',
 
 ## SCORING ##
     
-    #Scoring URLs should start with /scoring
+   (r'scoring/save$', 'scoring.views.Save'),
     
 ## FUNDRAISING ##
     
