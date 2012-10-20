@@ -52,8 +52,13 @@ urlpatterns = patterns('',
     #Reporting URLs should start with /grants
 
 ## SCORING ##
+
     (r'^scoring/reading/(?P<app_id>\d+)/$', 'scoring.views.read_grant'),
     #Scoring URLs should start with /scoring
+
+    
+    (r'scoring/save$', 'scoring.views.Save'),
+
     
 ## FUNDRAISING ##
     

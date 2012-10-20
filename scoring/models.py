@@ -1,9 +1,9 @@
 from django.db import models
 from django.forms import ModelForm
-from grant.models import GrantApplication
+from grants.models import GrantApplication
 from fund.models import Membership
 
-"""Early sketch of a model & modelform for an individual rating.  Feel free to modify or start from scratch 
+"""Early sketch of a model & modelform for an individual rating.  Feel free to modify or start from scratch"""
     
 class ApplicationRating(models.Model):
 
@@ -32,6 +32,9 @@ class ApplicationRating(models.Model):
 class RatingForm(ModelForm):
   class Meta:
     model = ApplicationRating
-    exclude = ('membership', 'application', 'submission_time')
+    exclude = ('submission_time')
     
+<<<<<<< HEAD
 """
+=======
+>>>>>>> 171d5e64e86d949bc88bae4db7c6eb34a35514cc

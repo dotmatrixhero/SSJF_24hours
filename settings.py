@@ -31,6 +31,7 @@ INSTALLED_APPS = (
   'django.contrib.messages',
   'grants',
   'fund',
+  'scoring',
   'djangoappengine', # last so it can override a few manage.py commands
 )
 
