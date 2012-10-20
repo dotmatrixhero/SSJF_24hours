@@ -2,6 +2,7 @@ from django.db import models
 from django.forms import ModelForm
 from grants.models import GrantApplication
 from fund.models import Membership
+from django.forms.widgets import RadioSelect
 
 """Early sketch of a model & modelform for an individual rating.  Feel free to modify or start from scratch"""
     
@@ -10,21 +11,19 @@ class ApplicationRating(models.Model):
   application = models.ForeignKey(GrantApplication)
   membership = models.ForeignKey(Membership)
   submitted = models.BooleanField(default=False)
-  in_progress = models.BooleanField(default=True)
   
   RATING_CHOICES = (
-    (0, 0),
     (1, 1),
     (2, 2),
     (3, 3),
     (4, 4),
     (5, 5),
   )
-  program = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, blank=True)
-  diversity = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, blank=True)
-  soundness = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, blank=True)
-  lack_of_access = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, blank=True)
-  collaboration = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, blank=True)
+  program = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
+  diversity = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
+  soundness = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
+  lack_of_access = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
+  collaboration = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
   
   submission_time = models.DateTimeField(auto_now_add=True)
   
@@ -38,5 +37,11 @@ class RatingForm(ModelForm):
   class Meta:
     model = ApplicationRating
     exclude = ('submission_time')
-    
-    
+    fields = ('program', 'diversity', 'soundness', 'lack_of_access', 'collaboration')
+    widgets = {
+      'program': RadioSelect(attrs={'class': 'grader_radio_button'}),
+      'diversity': RadioSelect(attrs={'class': 'grader_radio_button'}),
+      'soundness': RadioSelect(attrs={'class': 'grader_radio_button'}),
+      'lack_of_access': RadioSelect(attrs={'class': 'grader_radio_button'}),
+      'collaboration': RadioSelect(attrs={'class': 'grader_radio_button'}),
+    }

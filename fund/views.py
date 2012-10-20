@@ -244,7 +244,7 @@ def ScoringList(request):
   header = project.title
   
   #additional code here!
-  grant_list = models.GrantApplication.objects.filter(GrantApplication.grant_cycle = membership.giving_project.grant_cycle)
+  grant_list = grants.models.GrantApplication.objects.filter(grant_cycle = membership.giving_project.grant_cycle)
  
 
 

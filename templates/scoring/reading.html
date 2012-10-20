@@ -24,14 +24,33 @@ function save() {
       alert(textStatus + ' ' + errorThrown);
 		},
 	});
-	window.setTimeout("autoSave()", 30000);
+	//window.setTimeout("save()", 30000);
+}
+
+function submitReview() {
+  save();
+  alert('rediret to new page (not really)');
 }
 
 function main() {
-  var ratingsElements = $('.grader');
+  var ratingsElements = $('.grader_radio_button');
   for (var i = 0; i < ratingsElements.length; i++) {
     var grader = ratingsElements[i];
     grader.onclick = save;
+  }
+  
+  var expandButton = $('#expand_sidebar');
+  var collapseButton = $('#collapse_sidebar');
+  var sidebar = $('#read_sidebar');
+  expandButton[0].onclick = function() {
+    sidebar.removeClass('hid');
+    collapseButton.removeClass('hid');
+    expandButton.addClass('hid');
+  }
+  collapseButton[0].onclick = function() {
+    sidebar.addClass('hid');
+    expandButton.removeClass('hid');
+    collapseButton.addClass('hid');
   }
 }
 </script>
@@ -94,8 +113,14 @@ Submitted {{app.submission_time}}</div>
       </textarea>
     </form>
   </div>
-  <button>Collapse Sidebar </button>
+
+
   <div id="grader">
+    <form action="/scoring/save" method="post">
+      {{form}}
+      <input type="submit" value="Submit Review">
+    </form>
+    <!--
     <form>
       <div id="program" class="grader"><span class="grader_text">Program</span> <br />
         <label><input type="radio" name="program" value="1"/>1</label>
@@ -133,8 +158,11 @@ Submitted {{app.submission_time}}</div>
         <label><input type="radio" name="collaboration" value="5"/>5</label>
       </div>
     </form>
+    -->
   </div>
 </div>
+<button id="collapse_sidebar">Collapse Sidebar </button>
+<button id="expand_sidebar" class="hid">Expand Sidebar </button>
 
 {% endblock %}
   
