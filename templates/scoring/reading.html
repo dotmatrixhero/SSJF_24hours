@@ -17,19 +17,12 @@ function save() {
 		type:"POST",
 		data:$('form').serialize(),
 		success:function(){
-      alert('success!');
 		},
 		error:function(jqXHR, textStatus, errorThrown){
 			//document.getElementById('autosaved').innerHTML=textStatus+' '+errorThrown;
-      alert(textStatus + ' ' + errorThrown);
 		},
 	});
 	//window.setTimeout("save()", 30000);
-}
-
-function submitReview() {
-  save();
-  alert('rediret to new page (not really)');
 }
 
 function main() {
