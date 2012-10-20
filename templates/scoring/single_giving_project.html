@@ -5,8 +5,13 @@
 	
 	<body>
 		<ul>
-		{% for project in projects %}
-			<li><a href="/scoring/projectsummary/{{project.pk}}">{{project.title}}</a></li>
+		{% for app, ratings in dict.items %}
+			<li>{{app}}</li>
+			<ul>
+			{% for score in ratings %)
+				<li>{{score.membership.member}}: {{score}} </li>
+			(% endfor %)
+			</ul>
 		{% endfor %}
 		</ul>
 	</body>
@@ -17,5 +22,7 @@ organization(mean score) (number of users that have not viewed)
 giving projects grouping
 select specific projects
 top, bottom third
+individual scores/notes expand
+name, score/not submitted
 -->
 </html>

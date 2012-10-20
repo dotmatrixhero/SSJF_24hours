@@ -11,6 +11,7 @@ class ApplicationRating(models.Model):
   application = models.ForeignKey(GrantApplication)
   membership = models.ForeignKey(Membership)
   submitted = models.BooleanField(default=False)
+
   
   RATING_CHOICES = (
     (1, 1),
@@ -26,7 +27,8 @@ class ApplicationRating(models.Model):
   collaboration = models.PositiveIntegerField(choices=RATING_CHOICES, null=True, default=1)
   
   submission_time = models.DateTimeField(auto_now_add=True)
-  
+  def __unicode__(self):
+	return ("Program" + self.program + "\nDiversity" + self.diversity + "\nSoundness" + self.soundness + "\nLack of Access" + self.lack_of_access + "\nCollaboration" + self.collaboration) 
   def total(self):
 	if scoring_bonus_poc or scoring_bonus_geo:
 		return (1.1*self.program*7+self.diversity*5+self.soundness*4+self.lack_of_access*2+self.collaboration*2)
