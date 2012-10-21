@@ -260,7 +260,7 @@ def ScoringList(request):
 	  if review.submitted:
 		reviewed_grants.append(grant)
 	  else: 
-		review_in_progress_grant.append(grant)
+		review_in_progress_grants.append(grant)
 	except scoring.models.ApplicationRating.DoesNotExist:
 	  unreviewed_grants.append(grant)
 

@@ -2,13 +2,13 @@ from django.core.management.base import BaseCommand, CommandError
 from grants.models import GrantApplication
 from grants.models import GrantCycle
 from grants.models import Grantee
-
+from fund.models import GivingProject
 
 import datetime
 
 def generate_grantee():
-    a = Grantee()
-    a.name  = "Adeptus Mechanicus"
+    a = GivingProject()
+    a.title  = "Adeptus Mechanicus"
     a.email = "adMech@gmail.com"
     a.city = "Seattle"
     a.state = "WA"

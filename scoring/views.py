@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 import grants.models
 import models
 import fund.models 
+import grants.models
 
 # Create your views here.
 
@@ -16,16 +17,18 @@ import fund.models
 def read_grant(request, app_id):
   membership = request.membership
   application = get_object_or_404(grants.models.GrantApplication, pk = app_id)
-  
+  form = grants.models.GrantApplicationForm()
   try:
     review = scoring.models.ApplicationRating.objects.get(application = application, membership = membership)
     logging.info('successfully retrieved form')
-    form = models.RatingForm(instance=review)
+    scoring_form = models.RatingForm(instance=review)
   except:
-    logging.info('creating a new form')
-    form = models.RatingForm(initial={'application': application, 'membership': membership})
-    #form = models.RatingForm(initial={'membership': membership})
-  return render_to_response("scoring/reading.html", {'form': form})
+    logging.info('creating a new form, app is ' + str(application))
+    scoring_form = models.RatingForm(initial={'application': application, 'membership': membership})
+    
+    
+  return render_to_response("scoring/reading.html", {'scoring_form': scoring_form, 'app':application, 'form':form})
+  
 #  "grant": models.GrantApplication.objects.get(pk=app_id)})
     
 
@@ -48,7 +51,7 @@ def specific_project_admin(request, project_id):
     
 	for application, reviews in dict:
 		grand_total_points = 0
-		for review in reivews:
+		for review in reviews:
 			grand_total_points += review.total()
 		average_points[application] = grand_total_points * 1.0 / len(application)
 		average_points = sorted(average_points, key=lambda application: average_points[application], reverse=True)
@@ -70,6 +73,7 @@ def Save(request):
     if form.is_valid():
       logging.info('form is valid')
       if not request.is_ajax():
+        logging.info('not ajax')
         form.submitted = True
         form.save()
         return redirect('/fund/apps')

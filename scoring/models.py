@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import ModelForm
 from grants.models import GrantApplication
 from fund.models import Membership
-from django.forms.widgets import RadioSelect
+from django.forms.widgets import RadioSelect, HiddenInput
 
 """Early sketch of a model & modelform for an individual rating.  Feel free to modify or start from scratch"""
     
@@ -11,8 +11,6 @@ class ApplicationRating(models.Model):
   application = models.ForeignKey(GrantApplication)
   membership = models.ForeignKey(Membership)
   submitted = models.BooleanField(default=False)
-
-  
   
   
   RATING_CHOICES = (
@@ -43,11 +41,13 @@ class RatingForm(ModelForm):
   class Meta:
     model = ApplicationRating
     exclude = ('submission_time')
-    fields = ('comments', 'program', 'diversity', 'soundness', 'lack_of_access', 'collaboration')
+    # fields = ('comments', 'program', 'diversity', 'soundness', 'lack_of_access', 'collaboration')
     widgets = {
       'program': RadioSelect(attrs={'class': 'grader_radio_button'}),
       'diversity': RadioSelect(attrs={'class': 'grader_radio_button'}),
       'soundness': RadioSelect(attrs={'class': 'grader_radio_button'}),
       'lack_of_access': RadioSelect(attrs={'class': 'grader_radio_button'}),
       'collaboration': RadioSelect(attrs={'class': 'grader_radio_button'}),
+      'application': HiddenInput(),
+      'membership': HiddenInput(),
     }

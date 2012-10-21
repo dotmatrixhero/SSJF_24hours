@@ -16,7 +16,8 @@ function save() {
 		url:"/scoring/save",
 		type:"POST",
 		data:$('form').serialize(),
-		success:function(){
+		success:function(){as
+                   alert(data);
 		},
 		error:function(jqXHR, textStatus, errorThrown){
 			//document.getElementById('autosaved').innerHTML=textStatus+' '+errorThrown;
@@ -39,17 +40,21 @@ function main() {
     sidebar.removeClass('hid');
     collapseButton.removeClass('hid');
     expandButton.addClass('hid');
+    $('#sexybody').removeClass('qq');
   }
   collapseButton[0].onclick = function() {
     sidebar.addClass('hid');
     expandButton.removeClass('hid');
     collapseButton.addClass('hid');
+    $('#sexybody').addClass('qq');
+
   }
 }
 </script>
 
 <head>
 </head>
+<div id="sexybody">
 <div align="center">
 <h2>{{app.organization}}</h2>
 Submitted {{app.submission_time}}</div>
@@ -97,7 +102,7 @@ Submitted {{app.submission_time}}</div>
 {{app.narrative4}}<br><br>
 <div class="label">{{form.narrative5.label|safe}}</div><br>
 {{app.narrative5}}<br><br>
-
+</div>
 <div id="read_sidebar">
   
   
